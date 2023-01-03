@@ -84,7 +84,7 @@ void druckeSudoku(struct SudokuNode **spielfeld, int quadrantengroesse, int zahl
             {
                 if (spielfeld[i][j].currentNumber == -1)
                 {
-                    printf("    ");
+                    printf(" __ ");
                     continue;
                 }
                 printf("%2d  ", spielfeld[i][j].currentNumber);
@@ -92,7 +92,7 @@ void druckeSudoku(struct SudokuNode **spielfeld, int quadrantengroesse, int zahl
             {
                 if (spielfeld[i][j].currentNumber == -1)
                 {
-                    printf("    ");
+                    printf(" __ ");
                     continue;
                 }
                 printf("%2x  ", spielfeld[i][j]);
@@ -168,7 +168,7 @@ int validerInput(struct SudokuNode **spielfeld, int quadrantengroesse, int zahle
     x--;
     if (x >= spielfeldgroesse)
     {
-        puts("X-Koordinate ausserhalb des Spielfeldes");
+        puts("Y-Koordinate ausserhalb des Spielfeldes");
         return 0;
     }
 
@@ -180,7 +180,7 @@ int validerInput(struct SudokuNode **spielfeld, int quadrantengroesse, int zahle
     y--;
     if (y >= spielfeldgroesse)
     {
-        puts("Y-Koordinate ausserhalb des Spielfeldes");
+        puts("X-Koordinate ausserhalb des Spielfeldes");
         return 0;
     }
 
@@ -213,7 +213,7 @@ int validerInput(struct SudokuNode **spielfeld, int quadrantengroesse, int zahle
 
     printf("Korrekt! %d ist die richtige Eingabe!\n\n", feldzahl);
 
-    spielfeld[x][y].currentNumber = feldzahl;
+    InputXY(spielfeld, 9, x, y, feldzahl);
 
     return 1;
 }
@@ -331,21 +331,28 @@ void InputXY(struct SudokuNode **spielfeld, int quadrantengroesse, int x, int y,
     spielfeld[x][y].currentNumber = input;
     List2D_Clear(spielfeld[x][y].options);
     spielfeld[x][y].options = List2D_New();
-
+    puts("test1");
     InputZeile(spielfeld, 9, input, y);
+    puts("test2");
     InputQuadrant(spielfeld, 9, input, x, y);
+    puts("test3");
     InputSpalte(spielfeld, 9, input, x);
+    puts("test4");
 }
 
 void InputZeile(struct SudokuNode **spielfeld, int quadrantengroesse, int input, int y)
 {
     int spielfeldgroesse = quadrantengroesse * quadrantengroesse;
 
-    for (int i = 0; i < spielfeldgroesse; ++i)
+    for (int i = 0; i < spielfeldgroesse-1; i++)
     {
+        puts("zeile");
+        if (spielfeld[i][y].currentNumber != -1) continue;
         List2D_Remove(spielfeld[i][y].options, input);
-        if (List2D_Length(spielfeld[i][y].options) == 1)
+        if (List2D_Length(spielfeld[i][y].options) == 1){
+            puts("test");
             InputXY(spielfeld, 9, i, y, spielfeld[i][y].options->first->value);
+        }
     }
 }
 
@@ -353,11 +360,14 @@ void InputSpalte(struct SudokuNode **spielfeld, int quadrantengroesse, int input
 {
     int spielfeldgroesse = quadrantengroesse * quadrantengroesse;
 
-    for (int i = 0; i < spielfeldgroesse; ++i)
+    for (int i = 0; i < spielfeldgroesse-1; i++)
     {
+
+        if (spielfeld[x][i].currentNumber != -1) continue;
         List2D_Remove(spielfeld[x][i].options, input);
-        if (List2D_Length(spielfeld[x][i].options) == 1)
-            InputXY(spielfeld, 9, x, i, spielfeld[x][i].options->first->value);
+        if (List2D_Length(spielfeld[x][i].options) == 1){
+            puts("test");
+            InputXY(spielfeld, 9, x, i, spielfeld[x][i].options->first->value);}
     }
 
 }
@@ -367,14 +377,17 @@ void InputQuadrant(struct SudokuNode **spielfeld, int quadrantengroesse, int inp
     int quadrantX = x / quadrantengroesse;
     int quadrantY = y / quadrantengroesse;
 
-    for (int i = 0; i < quadrantengroesse; ++i)
+    for (int i = 0; i < quadrantengroesse-1; i++)
     {
 
-        for (int j = 0; j < quadrantengroesse; ++j)
+        for (int j = 0; j < quadrantengroesse-1; j++)
         {
+            if (spielfeld[i][j].currentNumber != -1) continue;
+
             List2D_Remove(spielfeld[i][j].options, input);
-            if (List2D_Length(spielfeld[i][j].options) == 1)
-                InputXY(spielfeld, 9, i, j, spielfeld[x][i].options->first->value);
+            if (List2D_Length(spielfeld[i][j].options) == 1){
+                puts("test");
+                InputXY(spielfeld, 9, i, j, spielfeld[x][i].options->first->value);}
         }
 
     }

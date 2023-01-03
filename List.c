@@ -9,7 +9,7 @@
 
 void List2D_Append(struct List2D* list, struct Node2D* newNode)
 {
-    if ( list == NULL || newNode == NULL) exit_with_output("NPR");
+    if ( list == NULL || newNode == NULL) exit_with_output("NPR - app");
 
     if (list->last == NULL || list->length == 0)
     {
@@ -29,7 +29,7 @@ void List2D_Append(struct List2D* list, struct Node2D* newNode)
 
 void List2D_Prepend(struct List2D* list, struct Node2D* newNode)
 {
-    if ( list == NULL || newNode == NULL) exit_with_output("NPR");
+    if ( list == NULL || newNode == NULL) exit_with_output("NPR - pre");
 
     struct Node2D *first = list->first;
     list->first = newNode;
@@ -49,7 +49,7 @@ void List2D_Prepend(struct List2D* list, struct Node2D* newNode)
 
 void List2D_Pop(struct List2D* list, struct Node2D* node)
 {
-    if ( list == NULL || node == NULL) exit_with_output("NPR");
+    if ( list == NULL || node == NULL) exit_with_output("NPR - pop");
 
     if (list->first == node)
         list->first = node->after;
@@ -65,7 +65,7 @@ void List2D_Pop(struct List2D* list, struct Node2D* node)
 
 void List2D_InsertBefore(struct List2D* list, struct Node2D* node, int value)
 {
-    if ( list == NULL || node == NULL) exit_with_output("NPR");
+    if ( list == NULL || node == NULL) exit_with_output("NPR - insBef");
 
     if (node ==  NULL)
         List2D_Append(list, Node2D_New(value));
@@ -84,7 +84,7 @@ void List2D_InsertBefore(struct List2D* list, struct Node2D* node, int value)
 
 void List2D_InsertAfter(struct List2D* list, struct Node2D* node, int value)
 {
-    if ( list == NULL) exit_with_output("NPR");
+    if ( list == NULL) exit_with_output("NPR - insAft");
 
     if (node == NULL) List2D_Append(list, Node2D_New(value));
 
