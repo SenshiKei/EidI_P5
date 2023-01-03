@@ -115,6 +115,12 @@ void List2D_Clear(struct List2D* list)
     free(list);
 }
 
+void List2D_Remove(struct List2D* list, int i)
+{
+    struct Node2D* node = List2D_Search(list, i);
+    List2D_Pop(list, node);
+}
+
 struct List2D* List2D_New()
 {
     struct List2D *newList = malloc(sizeof(struct List2D));

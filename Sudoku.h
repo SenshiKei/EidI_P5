@@ -29,11 +29,24 @@ int istVoll(struct SudokuNode **spielfeld, int quadrantengroesse);
 
 int validerInput(struct SudokuNode **spielfeld, int quadrantengroesse, int zahlenraum);
 
+int validerInputXY(struct SudokuNode **spielfeld, int quadrantengroesse, int x, int y, int input);
+
 int validerInputZeile(struct SudokuNode **spielfeld, int quadrantengroesse, int input, int y);
 
 int validerInputSpalte(struct SudokuNode **spielfeld, int quadrantengroesse, int input, int x);
 
 int validerInputQuadrant(struct SudokuNode **spielfeld, int quadrantengroesse, int input, int x, int y);
+
+void SetzeOptionen(struct SudokuNode** spielfeld, int x, int y);
+
+void InputXY(struct SudokuNode **spielfeld, int quadrantengroesse, int x, int y, int input);
+
+void InputZeile(struct SudokuNode **spielfeld, int quadrantengroesse, int input, int y);
+
+void InputSpalte(struct SudokuNode **spielfeld, int quadrantengroesse, int input, int x);
+
+void InputQuadrant(struct SudokuNode **spielfeld, int quadrantengroesse, int input, int x, int y);
+
 
 
 #endif //EIDI_P5_SUDOKU_H

@@ -33,6 +33,8 @@ int List2D_Length(struct List2D*);
 
 void List2D_Clear(struct List2D*);
 
+void List2D_Remove(struct List2D*, int i);
+
 struct List2D* List2D_New();
 
 struct Node2D* List2D_Search(struct List2D*, int);
